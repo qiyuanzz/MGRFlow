@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mgrflow"
+version = "0.1.0"
+description = "Morphology-Grounded Relational Flow for joint multiplex protein prediction"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.5",
+    "torchvision>=0.20",
+    "timm>=1.0.28,<2",
+    "diffusers>=0.30,<0.36",
+    "numpy>=1.26",
+    "pillow>=10",
+    "pyyaml>=6",
+    "safetensors>=0.4",
+]
+
+[project.optional-dependencies]
+esm = ["transformers>=4.44,<5"]
+fid = ["pytorch-fid==0.3.0"]
+
+[project.scripts]
+mgrflow-fit-p99 = "mgrflow.prepare:main"
+mgrflow-embed = "mgrflow.embed:main"
+mgrflow-train = "mgrflow.train:main"
+mgrflow-predict = "mgrflow.predict:main"
+mgrflow-evaluate = "mgrflow.evaluate:main"
+
+[tool.setuptools.packages.find]
+include = ["mgrflow*"]
+
+[tool.ruff]
+line-length = 100

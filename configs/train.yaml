@@ -1,0 +1,29 @@
+# Paths are relative to this configuration file.
+manifest: ../data/manifest.json
+p99: ../data/p99.json
+marker_table: ../data/markers.npz
+hoptimus: ../weights/H-optimus-0
+vae: ../weights/sd-2-1-base/vae
+output: ../runs/mgrflow
+
+seed: 42
+epochs: 50
+global_batch: 32          # H&E tiles per optimizer update across all GPUs
+flow_microbatch: 1        # H&E tiles per Flow forward on each GPU
+vae_batch: 8              # Marker images per VAE call
+workers: 2
+learning_rate: 0.0001
+validation_steps: 1
+validation_batch: 1      # H&E tiles per GPU during full validation
+early_stop_patience: 5   # Set to 0 to run all scheduled epochs
+ema: true
+ema_decay: 0.9999
+
+model:
+  width: 512
+  depth: 12
+  heads: 8
+  mlp_ratio: 4.0
+  smm: true
+  mma: true
+  mira: true
