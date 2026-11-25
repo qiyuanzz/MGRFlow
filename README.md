@@ -4,18 +4,6 @@
 
 MGRFlow jointly predicts a requested panel of spatial protein maps from a single H&E tile. A frozen H-optimus-0 encoder supplies morphology, fixed ESM-2 embeddings specify the marker identities, and a Rectified Flow transformer transports a set of Gaussian latents to protein latents. A frozen Stable Diffusion 2.1-base VAE decodes the panel at 256 × 256 pixels.
 
-## Model
-
-| Paper module | Implementation | Role |
-| --- | --- | --- |
-| **SMM** · Sequence-conditioned Marker Modulation | [`smm.py`](mgrflow/smm.py) | Fuses a fixed 640-dimensional ESM-2 marker embedding with the shared flow-time embedding to condition AdaLN-Zero. |
-| **MMA** · Multilevel Morphology Aggregation | [`mma.py`](mgrflow/mma.py) | Projects and fuses the aligned 16 × 16 grids from zero-indexed H-optimus-0 blocks 9, 19, 29, and 39. |
-| **MIRA** · Morphology-Informed Relational Attention | [`mira.py`](mgrflow/mira.py) | Adds aligned morphology at the transformer input and exchanges information across markers at each position in every block. |
-
-[`model.py`](mgrflow/model.py) connects the modules. Each marker's 4 × 32 × 32 VAE latent becomes 256 tokens through a lossless 2 × 2 rearrangement. In every block, the protein tokens first attend within their own spatial grid, then query the H&E grid, then attend across markers at the same position. An FFN completes the block. H&E tokens supply the keys and values for the cross-attention branch. Padding masks support batches with different numbers of measured markers.
-
-The code uses progress `s` from noise (0) to data (1). With `s = 1 - t`, this is the time convention in the paper written in the direction of sampling. Training matches the velocity `z_data - z_noise` using MSE. Inference integrates the learned velocity using a configurable number of Euler steps.
-
 ## Install
 
 Use Python 3.10 or newer and install the PyTorch build for your device. Training uses BF16 mixed precision on CUDA GPUs with BF16 support. CPU execution is suitable for small checks.
@@ -87,17 +75,6 @@ The main model trains on all available markers jointly for each H&E tile. `globa
 **EMA is enabled by default with decay 0.9999** and updates after each optimizer step. Validation and `best.pt` use the EMA weights. Set `ema: false` in the config or pass `--no-ema` to use online weights for both.
 
 The template schedules up to 50 epochs and stops after five consecutive epochs without a higher validation Pearson. The original main comparison used selected checkpoints at epochs 50, 30, and 39 for HuBMAP-Placenta, CRC-CyCIF, and KPMP, respectively. Use `epochs`, `validation_steps`, and `early_stop_patience` to configure these settings for each run.
-
-### Ablation switches
-
-| Configuration | `model.smm` | `model.mma` | `model.mira` |
-| --- | --- | --- | --- |
-| One-hot identity and last-layer H&E baseline | false | false | false |
-| + SMM | true | false | false |
-| + MMA | true | true | false |
-| + MIRA (MGRFlow) | true | true | true |
-
-All four settings retain per-block H&E cross-attention. Disabling MIRA disables both the aligned input addition and the same-position cross-marker attention.
 
 ## Predict a panel
 
