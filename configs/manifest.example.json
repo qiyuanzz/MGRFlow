@@ -1,0 +1,29 @@
+{
+  "dataset": "example_cohort",
+  "slides": [
+    {
+      "sample_key": "example_train",
+      "patient": "donor_a",
+      "split": "train",
+      "he": "train/he.npy",
+      "proteins": "train/proteins.npy",
+      "markers": ["CD3", "CD8"]
+    },
+    {
+      "sample_key": "example_val",
+      "patient": "donor_b",
+      "split": "val",
+      "he": "val/he.npy",
+      "proteins": "val/proteins.npy",
+      "markers": ["CD3", "CD8"]
+    },
+    {
+      "sample_key": "example_test",
+      "patient": "donor_c",
+      "split": "test",
+      "he": "test/he.npy",
+      "proteins": "test/proteins.npy",
+      "markers": ["CD3", "CD8"]
+    }
+  ]
+}

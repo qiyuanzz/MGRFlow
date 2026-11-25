@@ -7,7 +7,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from .runtime import flow_precision
+from ..runtime import flow_precision
 
 HE_MEAN = (0.707223, 0.578729, 0.703617)
 HE_STD = (0.211883, 0.230117, 0.177517)

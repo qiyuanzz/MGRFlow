@@ -5,8 +5,8 @@ import json
 
 import torch
 
-from .model import LATENT_SHAPE
-from .runtime import flow_precision
+from ..model.flow import LATENT_SHAPE
+from ..runtime import flow_precision
 
 
 def identity_noise(

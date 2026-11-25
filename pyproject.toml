@@ -24,11 +24,11 @@ esm = ["transformers>=4.44,<5"]
 fid = ["pytorch-fid==0.3.0"]
 
 [project.scripts]
-mgrflow-fit-p99 = "mgrflow.prepare:main"
-mgrflow-embed = "mgrflow.embed:main"
-mgrflow-train = "mgrflow.train:main"
-mgrflow-predict = "mgrflow.predict:main"
-mgrflow-evaluate = "mgrflow.evaluate:main"
+mgrflow-fit-p99 = "mgrflow.data.p99:main"
+mgrflow-embed = "mgrflow.data.embeddings:main"
+mgrflow-train = "mgrflow.training.train:main"
+mgrflow-predict = "mgrflow.inference.predict:main"
+mgrflow-evaluate = "mgrflow.evaluation.evaluate:main"
 
 [tool.setuptools.packages.find]
 include = ["mgrflow*"]

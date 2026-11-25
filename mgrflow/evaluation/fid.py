@@ -2,7 +2,7 @@
 
 import torch
 
-from .runtime import sum_ranks
+from ..runtime import sum_ranks
 
 
 class Moments:

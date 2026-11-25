@@ -1,4 +1,6 @@
 # Paths are relative to this configuration file.
+# Put your own paths in a copy named train.local.yaml.
+# The manifest uses aligned H&E uint8 [N, 3, H, W] and raw protein [N, K, H, W] arrays.
 manifest: ../data/manifest.json
 p99: ../data/p99.json
 marker_table: ../data/markers.npz

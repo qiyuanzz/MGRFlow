@@ -7,11 +7,11 @@ import numpy as np
 import torch
 from PIL import Image
 
-from .checkpoints import load_weights
-from .data import from_unit, read_thresholds
-from .encoders import HOptimus, ProteinVAE
-from .generate import predict_panel
-from .runtime import flow_precision, initialize
+from ..checkpoints import load_weights
+from ..data.tiles import from_unit, read_thresholds
+from ..model.encoders import HOptimus, ProteinVAE
+from ..runtime import flow_precision, initialize
+from .sampling import predict_panel
 
 
 def main() -> None:

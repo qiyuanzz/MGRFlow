@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from .data import read_manifest, resize_proteins
+from .tiles import read_manifest, resize_proteins
 
 BUCKETS = 1 << 16
 

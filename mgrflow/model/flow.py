@@ -1,4 +1,4 @@
-"""Joint rectified flow over a variable panel of protein latents."""
+"""MGRFlow velocity network and Euler sampler."""
 
 from dataclasses import dataclass
 

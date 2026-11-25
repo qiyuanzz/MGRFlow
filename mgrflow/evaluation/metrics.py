@@ -3,7 +3,7 @@
 import torch
 from torch.nn import functional as F
 
-from .runtime import sum_ranks
+from ..runtime import sum_ranks
 
 IMAGE_METRICS = ("pearson", "ssim", "psnr", "spearman")
 
