@@ -2,10 +2,10 @@
 
 ## Installation
 
-Requires Python 3.10 or newer.
+Requires Python 3.10 or newer. Run from the repository root.
 
 ```bash
-python -m pip install -e '.[esm,fid]'
+pip install -r requirements.txt
 ```
 
 ## Training

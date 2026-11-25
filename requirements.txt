@@ -1,0 +1,6 @@
+# Install MGRFlow with the core dependencies in pyproject.toml.
+.
+
+# Build ESM-2 marker embeddings and compute FID.
+transformers>=4.44,<5
+pytorch-fid==0.3.0
